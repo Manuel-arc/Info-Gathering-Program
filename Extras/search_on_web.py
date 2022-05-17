@@ -4,7 +4,7 @@ import time
 from sys import platform
 
 if platform == 'linux' or platform == 'linux2':
-    driver = webdriver.Chrome(executable_path="Extras\Drivers\chromedriver")
+    driver = webdriver.Chrome(executable_path="Extras/Drivers/chromedriver")
 elif platform == 'win32':
     driver = webdriver.Chrome("Extras\Drivers\chromedriver.exe")
 
