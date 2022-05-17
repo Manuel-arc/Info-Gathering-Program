@@ -5,8 +5,8 @@ from sys import platform
 import subprocess as sub
 
 if platform == 'linux' or platform == 'linux2':
-    #sub.run('export PATH=$PATH:~/Documents/Github/Info-Gathering-Program/Extras/Drivers/Linux/chromedriver', shell=True)
-    driver = webdriver.Firefox()
+    driver = webdriver.Firefox(
+        '~/Documents/Github/Info-Gathering-Program/Extras/Drivers/Linux/chromedriver')
 elif platform == 'win32':
     driver = webdriver.Chrome("Extras\Drivers\Windows\chromedriver.exe")
 
