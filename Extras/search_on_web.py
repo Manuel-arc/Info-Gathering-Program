@@ -5,9 +5,10 @@ from sys import platform
 import subprocess as sub
 
 if platform == 'linux' or platform == 'linux2':
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(
+        executable_path="Extras/Drivers/Linux/chromedriver")
 elif platform == 'win32':
-    driver = webdriver.Chrome("Extras\Drivers\chromedriver.exe")
+    driver = webdriver.Chrome("Extras\Drivers\Windows\chromedriver.exe")
 
 
 driver.get("https://www.google.com/")
