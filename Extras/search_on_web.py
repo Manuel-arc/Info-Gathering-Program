@@ -7,7 +7,7 @@ import subprocess as sub
 linux_driver_path = '../Extras/Drivers/Linux/'
 
 if platform == 'linux' or platform == 'linux2':
-    driver = webdriver.Firefox(f'{linux_driver_path}gechodriver')
+    driver = webdriver.Firefox()
 elif platform == 'win32':
     driver = webdriver.Chrome("Extras\Drivers\Windows\chromedriver.exe")
 
