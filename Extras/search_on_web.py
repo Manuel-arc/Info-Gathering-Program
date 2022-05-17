@@ -2,7 +2,7 @@ import selenium.webdriver as webdriver
 from selenium.webdriver.firefox.options import Options
 import time
 from sys import platform
-import subprocess as sub
+
 
 linux_driver_path = '../Extras/Drivers/Linux/'
 
