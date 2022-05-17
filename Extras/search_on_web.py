@@ -11,7 +11,6 @@ linux_driver_path = '../Extras/Drivers/Linux/'
 if platform == 'linux' or platform == 'linux2':
     driver = webdriver.Firefox()
 elif platform == 'win32':
-    #driver = webdriver.Chrome("Extras\Drivers\Windows\chromedriver.exe")
     driver = webdriver.Chrome(ChromeDriverManager().install())
 
 
