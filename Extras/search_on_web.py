@@ -1,20 +1,26 @@
+from selenium.webdriver.chrome.options import Options as opt_Chrome
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from sys import platform
 import time
-from unittest import result
-import selenium.webdriver as webdriver
-from selenium.webdriver.firefox.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+import selenium.webdriver as webdriver 
+import os
+
+#stops webdriver installtion to print
+os.environ['WDM_LOG'] = '0'
+
+#install chrome driver to use search
+def install_chrome_driver():
+    return ChromeDriverManager().install()
 
 
-linux_driver_path = '../Extras/Drivers/Linux/'
+options = opt_Chrome()
+options.headless = True
+driver = webdriver.Chrome(service=Service(install_chrome_driver()), options=options)
 
-if platform == 'linux' or platform == 'linux2':
-    driver = webdriver.Firefox()
-elif platform == 'win32':
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+url = "https://www.startpage.com/"
 
-
-driver.get("https://www.startpage.com/")
+driver.get(url)
 
 search_term = 'dog'
 
@@ -22,14 +28,16 @@ search_box = driver.find_element_by_id('q')
 search_box.send_keys(search_term)
 search_box.submit()
 
+#only works with startpage (for now. Need to se other browsers)
 links = driver.find_elements_by_class_name('result-link')
 
 results = []
+#get the links, print and append to a list for later use
 for link in links:
     href = link.get_attribute('href')
     print(href)
     results.append(href)
 
-time.sleep(20)
 
+#close the driver
 driver.close()
