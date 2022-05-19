@@ -1,0 +1,22 @@
+# /usr/bin/python3
+
+linux_path = "path/to/install/tools"
+
+
+def is_tool(name):
+    """Check whether `name` is on PATH and marked as executable."""
+    from shutil import which
+
+    return which(name) is not None
+
+
+print(is_tool('nmap'))
+
+
+def install_tools():
+    import subprocess as sub
+    print("Instalando telnet...")
+    try:
+        sub.run("sudo apt install telnet", shell=True)
+    except:
+        print("Não foi possível instalar o programa")

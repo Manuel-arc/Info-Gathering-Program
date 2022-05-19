@@ -1,67 +1,65 @@
-import subprocess as sub
-import re
+from art_logo import program_name, version, author
 
 
-def is_tool(name):
-    """Check whether `name` is on PATH and marked as executable."""
-    from shutil import which
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
-    return which(name) is not None
 
+def menu():
+    print(bcolors.OKBLUE + "1. Nmap scan")
+    print("2. Gobuster scan")
+    print("3. Testssl scan")
+    print("4. theHarvester scan")
+    print("5. Help")
+    print("0. Exit" + bcolors.ENDC)
 
-def nmap_scan():
-    nmap = sub.run('nmap 127.0.0.1', shell=True,
-                   capture_output=True).stdout.decode('utf-8')
+    answer = input(bcolors.UNDERLINE + "\nInfo Gathering" +
+                   bcolors.ENDC + " > ")
 
-    print(nmap)
+    _ = True
 
-    a = re.findall(
-        r'\d{1,5}/\w{1,6}\s{1,9}\w{1,9}\s{1,9}\w{1,20}', nmap, re.MULTILINE)
+    while _:
+        if answer.lower() == "1" or answer.lower() == 'nmap':
+            print('nmap')
+            _ = False
+        elif answer.lower() == "2" or answer.lower() == 'gobuster':
+            print('gobuster')
+            _ = False
+        elif answer.lower() == "3" or answer.lower() == 'testssl':
+            print('testssl')
+            _ = False
+        elif answer.lower() == "4" or answer.lower() == 'theharvester':
+            print('theharvester')
+            _ = False
+        elif answer.lower() == "5" or answer.lower() == 'help':
+            print(
+                bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
+            menu()
+        elif answer.lower() == "0" or answer.lower() == 'exit':
+            exit()
+        else:
+            print(bcolors.FAIL, bcolors.BOLD + "\nInvalid option. Plese try again!" +
+                  bcolors.ENDC, end="\n\n")
+            menu()
 
-    for e in a:
-        print(e)
-
-    c = []
-
-    for port in a:
-        c.append(re.match(r'\d{1,5}', port).group())
-
-    for port in c:
-        if port == '80':
-            print("\nIt appears you have port 80 open!")
-            res = input('Do you wanna do a gobuster? (y/n) ')
-            print()
-            if res.lower() == 'y':
-                sub.run('gobuster dir -u 127.0.0.1 -w common.txt', shell=True)
-            else:
-                print('Ok, bye!')
-                break
+    exit()
 
 
 if __name__ == '__main__':
-    print("1. Nmap scan")
-    print("2. Gobuster scan")
-    response = input("Escolha qual dos dois: ")
 
-    if(response.lower() == '1'):
-        a = is_tool('nmap')
-        if a:
-            nmap_scan()
-    elif(response.lower() == '2'):
-        a = is_tool('telnet')
-        if not a:
-            res = input(
-                "Não foi encontrado o programa telnet, deseja instalar? (y/n) ")
-            if res.lower() == 'y':
-                print("Instalando...\n")
-                try:
-                    sub.run("sudo apt install telnet", shell=True)
-                except:
-                    print("Não foi possível instalar o programa")
-                    exit()
-                print("Instalado com sucesso!")
-            else:
-                print("\nSaindo...")
-                exit()
-    else:
-        quit()
+    print(bcolors.HEADER)
+    print(program_name)
+    print()
+    print(version)
+    print(author, bcolors.ENDC, end="\n\n")
+    print("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-", end='\n\n')
+
+    menu()
