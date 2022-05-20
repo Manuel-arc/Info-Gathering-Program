@@ -1,25 +1,19 @@
-from art_logo import program_name, version, author
-
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+from art_logo import *
+from terminal_colors import bcolors
+from tools import nmap  # importar de outra pasta os scripts
 
 
 def menu():
-    print(bcolors.OKBLUE + "1. Nmap scan")
+    print(bcolors.OKBLUE)
+    print("1. Nmap scan")
     print("2. Gobuster scan")
     print("3. Testssl scan")
     print("4. theHarvester scan")
-    print("5. Help")
-    print("0. Exit" + bcolors.ENDC)
+    print("5. Finalrecon scan")
+    print("6. Loadbalancer scan")
+    print("7. Help")
+    print("0. Exit")
+    print(bcolors.ENDC)
 
     answer = input(bcolors.UNDERLINE + "\nInfo Gathering" +
                    bcolors.ENDC + " > ")
@@ -29,17 +23,35 @@ def menu():
     while _:
         if answer.lower() == "1" or answer.lower() == 'nmap':
             print('nmap')
+            print(bcolors.UNDERLINE + "\nInfo Gathering/Nmap" +
+                  bcolors.ENDC + " > ")
             _ = False
         elif answer.lower() == "2" or answer.lower() == 'gobuster':
             print('gobuster')
+            print(bcolors.UNDERLINE + "\nInfo Gathering/Gobuster" +
+                  bcolors.ENDC + " > ")
             _ = False
         elif answer.lower() == "3" or answer.lower() == 'testssl':
             print('testssl')
+            print(bcolors.UNDERLINE + "\nInfo Gathering/Testssl" +
+                  bcolors.ENDC + " > ")
             _ = False
         elif answer.lower() == "4" or answer.lower() == 'theharvester':
             print('theharvester')
+            print(bcolors.UNDERLINE + "\nInfo Gathering/theHarvester" +
+                  bcolors.ENDC + " > ")
             _ = False
-        elif answer.lower() == "5" or answer.lower() == 'help':
+        elif answer.lower() == "5" or answer.lower() == 'finalrecon':
+            print('finalrecon')
+            print(bcolors.UNDERLINE + "\nInfo Gathering/Finalrecon" +
+                  bcolors.ENDC + " > ")
+            _ = False
+        elif answer.lower() == "6" or answer.lower() == 'loadbalancer':
+            print('loadbalancer')
+            print(bcolors.UNDERLINE + "\nInfo Gathering/Loadbalancer" +
+                  bcolors.ENDC + " > ")
+            _ = False
+        elif answer.lower() == "7" or answer.lower() == 'help':
             print(
                 bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
             menu()
@@ -53,13 +65,16 @@ def menu():
     exit()
 
 
-if __name__ == '__main__':
-
+def header():
     print(bcolors.HEADER)
-    print(program_name)
-    print()
+    print(program_name, end="\n\n")
     print(version)
     print(author, bcolors.ENDC, end="\n\n")
     print("-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-", end='\n\n')
+
+
+if __name__ == '__main__':
+
+    header()
 
     menu()

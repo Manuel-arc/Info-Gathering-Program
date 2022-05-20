@@ -10,7 +10,7 @@ def is_tool(name):
     return which(name) is not None
 
 
-print(is_tool('nmap'))
+print(is_tool('finalrecon'))
 
 
 def install_tools():
