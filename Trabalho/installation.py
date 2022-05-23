@@ -2,6 +2,9 @@
 
 linux_path = "path/to/install/tools"
 
+linux_tools = ['nmap', 'gobuster', 'testssl',
+               'theHarvester', 'finalrecon', 'loadbalancer']
+
 
 def is_tool(name):
     """Check whether `name` is on PATH and marked as executable."""
