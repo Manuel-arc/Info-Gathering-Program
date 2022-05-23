@@ -19,6 +19,7 @@ def nmap_scan(ip):
     for port in a:
         c.append(re.match(r'\d{1,5}', port).group())
 
+    #to use gobuster next
     for port in c:
         if port == '80':
             print("\nIt appears you have port 80 open!")
