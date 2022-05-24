@@ -1,8 +1,15 @@
-import subprocess as sub
 import re
-
-from click import command
+import subprocess as sub
 from terminal_colors import bcolors
+from main import menu
+import sys
+
+if sys.platform == "linux" or sys.platform == "linux2":
+    path = ''
+elif sys.platform == "win32":
+    path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs'
+
+sys.path.append(f'{path}\Trabalho')
 
 
 class nmap:
@@ -21,6 +28,7 @@ nmap_command = nmap()
 def main():
     print('\n1. Target specification')
     print('2. Host discovery')
+    print('3. Go Back!')
     choice = input(bcolors.UNDERLINE +
                    "\nInfo Gathering/Nmap" + bcolors.ENDC + " > ")
 
@@ -28,6 +36,8 @@ def main():
         target_specificaion()
     elif choice == '2':
         host_discovery()
+    elif choice == '3':
+        menu()
 
 
 def nmap_scan():
@@ -72,13 +82,17 @@ def target_specificaion():
     print('3. Random hosts')
     print('4. Exclude hosts/network')
     print('5. Exclude a list from a file')
+    print('6. Go Back!')
     choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification" +
                    bcolors.ENDC + " > ")
 
     if choice == '1':
+        print("\n1. To go back!")
         host = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification/Host" +
                      bcolors.ENDC + " > ")
-        nmap_command.host.append(host)
+        if host != '1':
+            nmap_command.host.append(host)
+        target_specificaion()
     elif choice == '2':
         print(bcolors.WARNING +
               "\nWrite full path of the file if not in the same directory as the file!" + bcolors.ENDC)
@@ -88,13 +102,16 @@ def target_specificaion():
                     capture_output=True).stdout.decode('utf-8')
         print(l)
         nmap_command.host.append(l)
+    elif choice == '6':
+        main()
 
 
 def discover_ports():
-    print('\n1. TCP SYN scan')
-    print('2. TCP ACK scan')
-    print('3. UDP scan')
-    print('4. SCTP scan')
+    print('\n1. TCP SYN discovery')
+    print('2. TCP ACK discovery')
+    print('3. UDP discovery')
+    print('4. SCTP discovery')
+    print('5. Go Back!')
     choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Host_Discovery/Discover_ports" +
                    bcolors.ENDC + " > ")
 
@@ -107,6 +124,8 @@ def discover_ports():
         nmap_command.flags.append('-PU')
     elif choice == '4':
         nmap_command.flags.append('-PY')
+    elif choice == '5':
+        target_specificaion()
 
 
 def host_discovery():
@@ -116,6 +135,7 @@ def host_discovery():
     print('3. Treat all hosts as online')
     print('4. Discorver ports: (choose to get more options)')
     print('5. Exclude a list from a file')
+    print('6. Go Back!')
     choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Host_Discovery" +
                    bcolors.ENDC + " > ")
 
