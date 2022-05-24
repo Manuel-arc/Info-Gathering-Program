@@ -80,11 +80,14 @@ def target_specificaion():
                      bcolors.ENDC + " > ")
         nmap_command.host.append(host)
     elif choice == '2':
-        host = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification/Host" +
+        print(bcolors.WARNING +
+              "\nWrite full path of the file if not in the same directory as the file!" + bcolors.ENDC)
+        host = input(bcolors.UNDERLINE + "Info Gathering/Nmap/Target_Specification/Host" +
                      bcolors.ENDC + " > ")
-        l = sub.call(f'locate {host}', shell=True,
-                     capture_output=True).stdout.decode('utf-8')
-        sub.run(f'cat {l}', shell=True)
+        l = sub.run(f'locate {host}', shell=True,
+                    capture_output=True).stdout.decode('utf-8')
+        print(l)
+        nmap_command.host.append(l)
 
 
 def discover_ports():
