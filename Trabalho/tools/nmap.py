@@ -5,11 +5,11 @@ from main import menu
 import sys
 
 if sys.platform == "linux" or sys.platform == "linux2":
-    path = ''
+    path = r'/home/manuel/Info-Program/Info-Gathering-Program/Trabalho'
 elif sys.platform == "win32":
-    path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs'
+    path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs\Trabalho'
 
-sys.path.append(f'{path}\Trabalho')
+sys.path.append(path)
 
 
 class nmap:
@@ -19,6 +19,11 @@ class nmap:
         self.flags = []
 
     def concatenate_command(self):
+        pass
+
+    def check_options(self):
+        print("Hosts: ", self.host)
+        print('Flags: ', self.flags)
         pass
 
 
@@ -72,17 +77,10 @@ def nmap_scan():
         print("Something went wrong! Sorry!")
 
 
-def flag_options():
-    return 0
-
-
 def target_specificaion():
     print('\n1. Only one host')
     print('2. Custom list of hosts')
-    print('3. Random hosts')
-    print('4. Exclude hosts/network')
-    print('5. Exclude a list from a file')
-    print('6. Go Back!')
+    print('3. Go Back!')
     choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification" +
                    bcolors.ENDC + " > ")
 
@@ -102,7 +100,7 @@ def target_specificaion():
                     capture_output=True).stdout.decode('utf-8')
         print(l)
         nmap_command.host.append(l)
-    elif choice == '6':
+    elif choice == '3':
         main()
 
 
