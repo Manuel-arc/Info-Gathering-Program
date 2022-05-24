@@ -41,6 +41,7 @@ def nmap_scan():
 if __name__ == '__main__':
     print("1. Nmap scan")
     print("2. Gobuster scan")
+    print("3. Teste de return_code")
     response = input("Escolha qual dos dois: ")
 
     if(response.lower() == '1'):
@@ -63,5 +64,8 @@ if __name__ == '__main__':
             else:
                 print("\nSaindo...")
                 exit()
+    elif (response.lower() == '3'):
+        nmap = sub.run('nmap 127.0.0.1', shell=True, capture_output=True)
+        print(nmap.returncode)
     else:
         quit()
