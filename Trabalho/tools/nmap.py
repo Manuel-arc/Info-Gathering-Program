@@ -1,8 +1,37 @@
 import subprocess as sub
 import re
 
+from click import command
+from terminal_colors import bcolors
 
-def nmap_scan(ip):
+
+class nmap:
+
+    def __init__(self):
+        self.host = []
+        self.flags = []
+
+    def concatenate_command(self):
+        pass
+
+
+nmap_command = nmap()
+
+
+def main():
+    print('\n1. Target specification')
+    print('2. Host discovery')
+    choice = input(bcolors.UNDERLINE +
+                   "\nInfo Gathering/Nmap" + bcolors.ENDC + " > ")
+
+    if choice == '1':
+        target_specificaion()
+    elif choice == '2':
+        host_discovery()
+
+
+def nmap_scan():
+    ip = input("Write the ip: ")
     nmap = sub.run(f'nmap {ip}', shell=True,
                    capture_output=True).stdout.decode('utf-8')
 
@@ -35,6 +64,62 @@ def nmap_scan(ip):
 
 def flag_options():
     return 0
+
+
+def target_specificaion():
+    print('\n1. Only one host')
+    print('2. Custom list of hosts')
+    print('3. Random hosts')
+    print('4. Exclude hosts/network')
+    print('5. Exclude a list from a file')
+    choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification" +
+                   bcolors.ENDC + " > ")
+
+    if choice == '1':
+        host = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification/Host" +
+                     bcolors.ENDC + " > ")
+        nmap_command.host.append(host)
+    elif choice == '2':
+        host = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification/Host" +
+                     bcolors.ENDC + " > ")
+        l = sub.call(f'locate {host}', shell=True,
+                     capture_output=True).stdout.decode('utf-8')
+        sub.run(f'cat {l}', shell=True)
+
+
+def discover_ports():
+    print('\n1. TCP SYN scan')
+    print('2. TCP ACK scan')
+    print('3. UDP scan')
+    print('4. SCTP scan')
+    choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Host_Discovery/Discover_ports" +
+                   bcolors.ENDC + " > ")
+
+    if choice == '1':
+        print('worked')
+        nmap_command.flags.append('-PS')
+    elif choice == '2':
+        nmap_command.flags.append('-PA')
+    elif choice == '3':
+        nmap_command.flags.append('-PU')
+    elif choice == '4':
+        nmap_command.flags.append('-PY')
+
+
+def host_discovery():
+
+    print('\n1. List scan - simply list targets to scan')
+    print('2. Ping scan - disable port scan')
+    print('3. Treat all hosts as online')
+    print('4. Discorver ports: (choose to get more options)')
+    print('5. Exclude a list from a file')
+    choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Host_Discovery" +
+                   bcolors.ENDC + " > ")
+
+    if choice == '4':
+        discover_ports()
+        for i in nmap_command.flags:
+            print(i)
 
 
 def call_gobuster():

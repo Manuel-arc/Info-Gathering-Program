@@ -1,6 +1,6 @@
 from art_logo import *
 from terminal_colors import bcolors
-from tools import nmap  # importar de outra pasta os scripts
+from tools import nmap, commands, finalrecon, gobuster, loadbalancer, testssl, theharvester  # importar de outra pasta os scripts
 
 
 def menu():
@@ -25,6 +25,7 @@ def menu():
             print('nmap')
             print(bcolors.UNDERLINE + "\nInfo Gathering/Nmap" +
                   bcolors.ENDC + " > ")
+            nmap.main()
             _ = False
         elif answer.lower() == "2" or answer.lower() == 'gobuster':
             print('gobuster')
