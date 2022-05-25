@@ -26,7 +26,17 @@ def main():
 
 
 def load_balancer_scan():
-    str = sub.run('finalrecon --sub https://www.smasmaia.pt', shell=True,
+    str = sub.run('lbd 127.0.0.1', shell=True,
                   capture_output=True).stdout.decode('utf-8')
     final_str = re.findall(
-        r'[^a-z0-9]{29}', '', str)
+        r'(?s).*', str, re.MULTILINE)
+
+    s = ''
+    for i in final_str:
+        s += i
+
+    i = i.replace('\n', '')
+    print(i)
+
+
+load_balancer_scan()
