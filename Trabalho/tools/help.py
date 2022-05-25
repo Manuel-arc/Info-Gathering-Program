@@ -10,16 +10,3 @@ elif sys.platform == "win32":
     path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs\Trabalho'
 
 sys.path.append(path)
-
-
-class command():
-
-    def __init__(self) -> None:
-        pass
-
-
-command_cmd = command()
-
-
-def main():
-    pass

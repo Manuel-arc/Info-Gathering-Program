@@ -1,6 +1,7 @@
 from art_logo import *
 from terminal_colors import bcolors
-from tools import nmap, commands, finalrecon, gobuster, loadbalancer, testssl, theharvester  # importar de outra pasta os scripts
+# importar de outra pasta os scripts
+from tools import nmap, commands, finalrecon, gobuster, loadbalancer, testssl, theharvester
 
 
 def menu():
@@ -8,10 +9,9 @@ def menu():
     print("1. Nmap scan")
     print("2. Gobuster scan")
     print("3. Testssl scan")
-    print("4. theHarvester scan")
-    print("5. Finalrecon scan")
-    print("6. Loadbalancer scan")
-    print("7. Help")
+    print("4. Finalrecon scan")
+    print("5. Loadbalancer scan")
+    print("6. Help")
     print("0. Exit")
     print(bcolors.ENDC)
 
@@ -31,28 +31,27 @@ def menu():
             print('gobuster')
             print(bcolors.UNDERLINE + "\nInfo Gathering/Gobuster" +
                   bcolors.ENDC + " > ")
+            gobuster.main()
             _ = False
         elif answer.lower() == "3" or answer.lower() == 'testssl':
             print('testssl')
             print(bcolors.UNDERLINE + "\nInfo Gathering/Testssl" +
                   bcolors.ENDC + " > ")
+            testssl.main()
             _ = False
-        elif answer.lower() == "4" or answer.lower() == 'theharvester':
-            print('theharvester')
-            print(bcolors.UNDERLINE + "\nInfo Gathering/theHarvester" +
-                  bcolors.ENDC + " > ")
-            _ = False
-        elif answer.lower() == "5" or answer.lower() == 'finalrecon':
+        elif answer.lower() == "4" or answer.lower() == 'finalrecon':
             print('finalrecon')
             print(bcolors.UNDERLINE + "\nInfo Gathering/Finalrecon" +
                   bcolors.ENDC + " > ")
+            finalrecon.main()
             _ = False
-        elif answer.lower() == "6" or answer.lower() == 'loadbalancer':
+        elif answer.lower() == "5" or answer.lower() == 'loadbalancer':
             print('loadbalancer')
             print(bcolors.UNDERLINE + "\nInfo Gathering/Loadbalancer" +
                   bcolors.ENDC + " > ")
+            loadbalancer.main()
             _ = False
-        elif answer.lower() == "7" or answer.lower() == 'help':
+        elif answer.lower() == "6" or answer.lower() == 'help':
             print(
                 bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
             menu()

@@ -19,7 +19,7 @@ class nmap:
         self.flags = []
 
     def concatenate_command(self):
-        pass
+        command = 'nmap'
 
     def check_options(self):
         print("Hosts: ", self.host)
@@ -33,6 +33,7 @@ nmap_command = nmap()
 def main():
     print('\n1. Target specification')
     print('2. Host discovery')
+    print('3. Check options')
     print('3. Go Back!')
     choice = input(bcolors.UNDERLINE +
                    "\nInfo Gathering/Nmap" + bcolors.ENDC + " > ")
@@ -42,6 +43,8 @@ def main():
     elif choice == '2':
         host_discovery()
     elif choice == '3':
+        nmap_command.check_options()
+    elif choice == '4':
         menu()
 
 
