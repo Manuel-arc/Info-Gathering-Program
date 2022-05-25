@@ -31,12 +31,12 @@ def load_balancer_scan():
     final_str = re.findall(
         r'(?s).*', str, re.MULTILINE)
 
-    s = ''
-    for i in final_str:
-        s += i
+    final_str = final_str.replace('\n', ' ')
+    final_str = final_str.replace('. ', '.\n')
+    final_str = final_str.replace(') ', ')\n')
+    final_str = final_str.replace(': ', ':\n')
 
-    i = i.replace('\n', '')
-    print(i)
+    print(str)
 
 
 load_balancer_scan()
