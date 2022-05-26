@@ -1,7 +1,7 @@
 import re
 import subprocess as sub
-#from terminal_colors import bcolors
-#from main import menu
+from terminal_colors import bcolors
+import main_page
 import sys
 
 if sys.platform == "linux" or sys.platform == "linux2":
@@ -48,6 +48,3 @@ def remove_with_regex():
         r'[^a-z0-9]{29}', '', str)
 
     print(final_str)
-
-
-remove_with_regex()

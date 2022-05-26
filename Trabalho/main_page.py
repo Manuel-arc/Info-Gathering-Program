@@ -1,7 +1,7 @@
 from art_logo import *
 from terminal_colors import bcolors
 # importar de outra pasta os scripts
-from tools import nmap, commands, finalrecon, gobuster, loadbalancer, testssl, theharvester
+from tools import nmap, commands, finalrecon, gobuster, loadbalancer, testssl
 
 
 def menu():
@@ -46,11 +46,7 @@ def menu():
             finalrecon.main()
             _ = False
         elif answer.lower() == "5" or answer.lower() == 'loadbalancer':
-            print('loadbalancer')
-            print(bcolors.UNDERLINE + "\nInfo Gathering/Loadbalancer" +
-                  bcolors.ENDC + " > ")
             loadbalancer.main()
-            _ = False
         elif answer.lower() == "6" or answer.lower() == 'help':
             print(
                 bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
@@ -74,7 +70,6 @@ def header():
 
 
 if __name__ == '__main__':
-
     header()
 
     menu()

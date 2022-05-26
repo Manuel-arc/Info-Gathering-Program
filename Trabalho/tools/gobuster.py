@@ -1,7 +1,7 @@
 import re
 import subprocess as sub
-#from terminal_colors import bcolors
-#from main import menu
+from terminal_colors import bcolors
+import main_page
 import sys
 
 if sys.platform == "linux" or sys.platform == "linux2":
@@ -48,6 +48,3 @@ def gobuster_scan():
 
     sub.run(
         f'gobuster dir -u {gobuster_command.host} -w {gobuster_command.wordlist[0]}', shell=True)
-
-
-gobuster_scan()

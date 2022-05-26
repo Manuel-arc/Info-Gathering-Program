@@ -1,7 +1,7 @@
 import re
 import subprocess as sub
 from terminal_colors import bcolors
-from main import menu
+import main_page
 import sys
 
 if sys.platform == "linux" or sys.platform == "linux2":
@@ -45,7 +45,7 @@ def main():
     elif choice == '3':
         nmap_command.check_options()
     elif choice == '4':
-        menu()
+        main.menu()
 
 
 def nmap_scan():

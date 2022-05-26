@@ -1,7 +1,7 @@
 import re
 import subprocess as sub
-#from terminal_colors import bcolors
-#from main import menu
+from terminal_colors import bcolors
+import main_page
 import sys
 
 if sys.platform == "linux" or sys.platform == "linux2":
@@ -15,28 +15,41 @@ sys.path.append(path)
 class load_balancer:
 
     def __init__(self) -> None:
-        pass
+        host = ''
 
 
 ldb_command = load_balancer()
 
 
 def main():
-    pass
+    print('\nMENU:')
+    print('\n1. Load balancer scan')
+    print('2. Go Back!')
+    choice = input(bcolors.UNDERLINE +
+                   "\nInfo Gathering/LoadBalancer" + bcolors.ENDC + " > ")
+
+    if choice == '1':
+        load_balancer_scan()
+    elif choice == '2':
+        main_page.menu()
 
 
 def load_balancer_scan():
-    str = sub.run('lbd 127.0.0.1', shell=True,
+
+    ldb_command.host = input("\nHost: ")
+
+    # change to use input on the string
+    str = sub.run(f'lbd {ldb_command.host}', shell=True,
                   capture_output=True).stdout.decode('utf-8')
     final_str = re.findall(
         r'(?s).*', str, re.MULTILINE)
 
-    final_str = final_str.replace('\n', ' ')
-    final_str = final_str.replace('. ', '.\n')
-    final_str = final_str.replace(') ', ')\n')
-    final_str = final_str.replace(': ', ':\n')
+    final_str = final_str[0]
 
-    print(str)
+    final_str = final_str.replace('g: NOT FOUND\n', 'NOT FOUND\n\n')
+    final_str = final_str.replace(
+        ': \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n', ': ')
 
-
-load_balancer_scan()
+    print('\n\n<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>', end='\n\n')
+    print(final_str)
+    print('<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>')
