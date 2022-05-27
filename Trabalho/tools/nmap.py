@@ -1,3 +1,4 @@
+from random import choices
 import re
 import subprocess as sub
 from terminal_colors import bcolors
@@ -15,7 +16,7 @@ sys.path.append(path)
 class nmap:
 
     def __init__(self):
-        self.host = []
+        self.host = ''
         self.flags = []
 
     def concatenate_command(self):
@@ -24,28 +25,48 @@ class nmap:
     def check_options(self):
         print("Hosts: ", self.host)
         print('Flags: ', self.flags)
-        pass
 
 
 nmap_command = nmap()
 
 
 def main():
-    print('\n1. Target specification')
-    print('2. Host discovery')
-    print('3. Check options')
-    print('3. Go Back!')
+
+    print('1. Help')
+    print('2. Go Back!')
     choice = input(bcolors.UNDERLINE +
                    "\nInfo Gathering/Nmap" + bcolors.ENDC + " > ")
 
-    if choice == '1':
-        target_specificaion()
-    elif choice == '2':
-        host_discovery()
-    elif choice == '3':
+    choice = choice.split(" ")
+
+    if choice[0].upper() == 'OPTIONS':
         nmap_command.check_options()
-    elif choice == '4':
+        print()
+        main()
+    elif choice[0].upper() == 'HOST':
+        if choice[1].upper() == 'LIST':
+            check_target_list(choice[2])
+        else:
+            nmap_command.host = choice[1]
+        print()
+        main()
+    elif choice[0].upper() == 'FLAG':
+        print('Choose your flags for the scan')
+        print()
+        main()
+    elif choice[0] == '1':
+        print("Type OPTIONS to see the host and flags for the scan.")
+        print("Type HOST to choose a target.")
+        print("Type HOST LIST to choose a list of targets.")
+        print('Type FLAG to choose the flags for the scan.')
+        print('Separate the flags with a space.')
+        print()
+        main()
+    elif choice[0] == '2':
         main.menu()
+    else:
+        print("Incorrect input! Please try again!\n")
+        main()
 
 
 def nmap_scan():
@@ -80,33 +101,22 @@ def nmap_scan():
         print("Something went wrong! Sorry!")
 
 
-def target_specificaion():
-    print('\n1. Only one host')
-    print('2. Custom list of hosts')
-    print('3. Go Back!')
-    choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification" +
-                   bcolors.ENDC + " > ")
+def check_target_list(target_list):
+    l = sub.run(f'locate {target_list}', shell=True,
+                capture_output=True).stdout.decode('utf-8')
+    output = l.split('\n')
+    output = output[:-1]
 
-    if choice == '1':
-        print("\n1. To go back!")
-        print(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification" +
-              bcolors.ENDC + " > ")
-        host = input("Host: ")
-        if host != '1':
-            nmap_command.host.append(host)
-        target_specificaion()
-    elif choice == '2':
-        print(bcolors.WARNING +
-              "\nWrite full path of the file if not in the same directory as the file!" + bcolors.ENDC)
-        print(bcolors.UNDERLINE + "Info Gathering/Nmap/Target_Specification" +
-              bcolors.ENDC + " > ")
-        host = input("List of hosts: ")
-        l = sub.run(f'locate {host}', shell=True,
-                    capture_output=True).stdout.decode('utf-8')
-        print(l)
-        nmap_command.host.append(l)
-    elif choice == '3':
-        main()
+    if len(output) == 1:
+        nmap_command.host = target_list
+    else:
+        print('Choose from the given lists your choice:\n')
+        for i in range(len(output)):
+            print(f'{i} - {output[i]}')
+
+        choice = input('Number of list: ')
+        if choice.isdigit():
+            nmap_command.host = output[int(choice)]
 
 
 def discover_ports():
@@ -127,8 +137,6 @@ def discover_ports():
         nmap_command.flags.append('-PU')
     elif choice == '4':
         nmap_command.flags.append('-PY')
-    elif choice == '5':
-        target_specificaion()
 
 
 def host_discovery():
