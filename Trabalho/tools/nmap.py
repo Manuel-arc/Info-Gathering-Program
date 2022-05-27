@@ -89,16 +89,18 @@ def target_specificaion():
 
     if choice == '1':
         print("\n1. To go back!")
-        host = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification/Host" +
-                     bcolors.ENDC + " > ")
+        print(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Target_Specification" +
+              bcolors.ENDC + " > ")
+        host = input("Host: ")
         if host != '1':
             nmap_command.host.append(host)
         target_specificaion()
     elif choice == '2':
         print(bcolors.WARNING +
               "\nWrite full path of the file if not in the same directory as the file!" + bcolors.ENDC)
-        host = input(bcolors.UNDERLINE + "Info Gathering/Nmap/Target_Specification/Host" +
-                     bcolors.ENDC + " > ")
+        print(bcolors.UNDERLINE + "Info Gathering/Nmap/Target_Specification" +
+              bcolors.ENDC + " > ")
+        host = input("List of hosts: ")
         l = sub.run(f'locate {host}', shell=True,
                     capture_output=True).stdout.decode('utf-8')
         print(l)
