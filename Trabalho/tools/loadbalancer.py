@@ -46,7 +46,6 @@ def load_balancer_scan():
 
     final_str = final_str[0]
 
-    final_str = final_str.replace('g: NOT FOUND\n', 'NOT FOUND\n\n')
     final_str = final_str.replace(
         ': \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n', ': ')
 
