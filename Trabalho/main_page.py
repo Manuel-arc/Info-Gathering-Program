@@ -1,3 +1,5 @@
+# /usr/bin/python3
+
 from art_logo import *
 from terminal_colors import bcolors
 # importar de outra pasta os scripts
@@ -11,7 +13,8 @@ def menu():
     print("3. Testssl scan")
     print("4. Finalrecon scan")
     print("5. Loadbalancer scan")
-    print("6. Help")
+    print("6. Full scan")
+    print("7. Help")
     print("0. Exit")
     print(bcolors.ENDC)
 
@@ -47,7 +50,9 @@ def menu():
             _ = False
         elif answer.lower() == "5" or answer.lower() == 'loadbalancer':
             loadbalancer.main()
-        elif answer.lower() == "6" or answer.lower() == 'help':
+        elif answer.lower() == "6" or answer.lower() == 'full':
+            print('Do a fullscan!!')
+        elif answer.lower() == "7" or answer.lower() == 'help':
             print(
                 bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
             menu()

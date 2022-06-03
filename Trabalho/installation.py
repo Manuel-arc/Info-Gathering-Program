@@ -3,7 +3,7 @@
 linux_path = "path/to/install/tools"
 
 linux_tools = ['nmap', 'gobuster', 'testssl',
-               'theHarvester', 'finalrecon', 'loadbalancer']
+               'locate', 'finalrecon', 'lbd']
 
 
 def is_tool(name):
@@ -13,13 +13,13 @@ def is_tool(name):
     return which(name) is not None
 
 
-print(is_tool('finalrecon'))
+print(is_tool('lbd'))
 
 
-def install_tools():
+def install_tools(tool_name):
     import subprocess as sub
-    print("Instalando telnet...")
+    print(f"Instalando {tool_name}...")
     try:
-        sub.run("sudo apt install telnet", shell=True)
+        sub.run(f"sudo apt install {tool_name}", shell=True)
     except:
         print("Não foi possível instalar o programa")
