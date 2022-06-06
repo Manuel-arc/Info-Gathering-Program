@@ -1,3 +1,5 @@
+from urllib import response
+import requests
 from selenium.webdriver.chrome.options import Options as opt_Chrome
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -5,6 +7,7 @@ from sys import platform
 import time
 import selenium.webdriver as webdriver
 import os
+import urllib.request
 
 # stops webdriver installtion to print
 os.environ['WDM_LOG'] = '0'
@@ -16,40 +19,40 @@ def install_chrome_driver():
     return ChromeDriverManager().install()
 
 
+# options to make the chrome GUI not pop up
 options = opt_Chrome()
 options.headless = True
 driver = webdriver.Chrome(service=Service(
     install_chrome_driver()), options=options)
 
-url = "https://www.smasmaia.pt/"
+# url to make the search
+url = "https://dnsdumpster.com"
 
 driver.get(url)
 
-''' search_term = 'dog'
+# input the domain to search
+search_term = 'cm-alenquer.pt'
 
-search_box = driver.find_element_by_id('q')
+search_box = driver.find_element_by_id('regularInput')
 search_box.send_keys(search_term)
-search_box.submit() '''
+search_box.submit()
 
-# only works with startpage (for now. Need to se other browsers)
-#links = driver.find_elements_by_class_name('result-link')
-links = driver.find_elements_by_tag_name('script')
-links1 = driver.find_elements_by_tag_name('link')
+# find the search results by the class name
+links = driver.find_elements_by_class_name('img-responsive')
 
-results = []
-# get the links, print and append to a list for later use
-print("SCRIPT TAGS")
-for link in links:
-    #href = link.get_attribute('href')
-    print(link.get_attribute('src'))
-    # results.append(href)
+if (len(links) == 1):
+    print(links[0].get_attribute('src'))
+    url = links[0].get_attribute('src')
+    response = requests.get(url)
+    search_term = search_term.split('.')[0]
+    image = f"Images/{search_term}.png"
+    urllib.request.urlretrieve(url, image)
 
-print("LINK TAGS----------------------------------------------------")
-for link in links1:
-    #href = link.get_attribute('href')
-    print(link.get_attribute('href'))
-    # results.append(href)
-
+else:
+    for link in links:
+        #href = link.get_attribute('href')
+        print(link.get_attribute('src'))
+        # results.append(href)
 
 # close the driver
 driver.close()
