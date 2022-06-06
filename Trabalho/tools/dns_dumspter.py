@@ -3,10 +3,9 @@ import requests
 from selenium.webdriver.chrome.options import Options as opt_Chrome
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from sys import platform
-import time
 import selenium.webdriver as webdriver
 import os
+from sys import platform
 
 
 # stops webdriver installtion to print
@@ -41,12 +40,17 @@ search_box.submit()
 links = driver.find_elements_by_class_name('img-responsive')
 
 if (len(links) == 1):
-    print(links[0].get_attribute('src'))
     url = links[0].get_attribute('src')
     response = requests.get(url)
     search_term = search_term.split('.')[0]
-    image = f"Images/{search_term}.png"
+    image = ''
+    if platform == 'linux' or platform == 'linux2':
+        image = f"../Images/{search_term}.png"
+    elif platform == 'win32':
+        image = f"Images/{search_term}.png"
+
     request.urlretrieve(url, image)
+    print("Download complete!!!")
 
 else:
     for link in links:
