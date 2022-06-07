@@ -54,7 +54,7 @@ def menu():
         elif answer.lower() == "6" or answer.lower() == 'domain map':
             print('Domain Map')
         elif answer.lower() == "7" or answer.lower() == 'full':
-            print('Do a fullscan!!')
+            dns_dumspter.main()
         elif answer.lower() == "8" or answer.lower() == 'help':
             print(
                 bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
