@@ -13,7 +13,7 @@ def menu():
     print("3. Testssl scan")
     print("4. Finalrecon scan")
     print("5. Loadbalancer scan")
-    print('8. Domain Map')
+    print('6. Domain Map')
     print("7. Full scan")
     print("8. Help")
     print("0. Exit")
@@ -52,7 +52,7 @@ def menu():
         elif answer.lower() == "5" or answer.lower() == 'loadbalancer':
             loadbalancer.main()
         elif answer.lower() == "6" or answer.lower() == 'domain map':
-            print('Domain Map')
+            dns_dumspter.main()
         elif answer.lower() == "7" or answer.lower() == 'full':
             dns_dumspter.main()
         elif answer.lower() == "8" or answer.lower() == 'help':

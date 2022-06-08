@@ -57,7 +57,6 @@ def domain_map_search():
 
     if (len(links) == 1):
         url = links[0].get_attribute('src')
-        response = requests.get(url)
         search_term = search_term.split('.')[0]
         image = ''
         if platform == 'linux' or platform == 'linux2':
