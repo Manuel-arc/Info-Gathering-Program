@@ -14,8 +14,9 @@ def menu():
     print("4. Finalrecon scan")
     print("5. Loadbalancer scan")
     print('6. Domain Map')
-    print("7. Full scan")
-    print("8. Help")
+    print('7. CSS and JS files')
+    print("8. Full scan")
+    print("9. Help")
     print("0. Exit")
     print(bcolors.ENDC)
 
@@ -53,9 +54,11 @@ def menu():
             loadbalancer.main()
         elif answer.lower() == "6" or answer.lower() == 'domain map':
             dns_dumspter.main()
-        elif answer.lower() == "7" or answer.lower() == 'full':
-            dns_dumspter.main()
-        elif answer.lower() == "8" or answer.lower() == 'help':
+        elif answer.lower() == "7" or answer.lower() == 'css' or answer.lower() == 'js':
+            print('js and css files')
+        elif answer.lower() == "8" or answer.lower() == 'full':
+            print('full scan')
+        elif answer.lower() == "9" or answer.lower() == 'help':
             print(
                 bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
             menu()
