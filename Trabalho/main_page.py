@@ -3,7 +3,7 @@
 from art_logo import *
 from terminal_colors import bcolors
 # importar de outra pasta os scripts
-from tools import nmap, commands, finalrecon, gobuster, loadbalancer, testssl, dns_dumspter
+from tools import nmap, commands, finalrecon, gobuster, loadbalancer, testssl, dns_dumspter, js_css_files
 
 
 def menu():
@@ -55,7 +55,7 @@ def menu():
         elif answer.lower() == "6" or answer.lower() == 'domain map':
             dns_dumspter.main()
         elif answer.lower() == "7" or answer.lower() == 'css' or answer.lower() == 'js':
-            print('js and css files')
+            js_css_files.main()
         elif answer.lower() == "8" or answer.lower() == 'full':
             print('full scan')
         elif answer.lower() == "9" or answer.lower() == 'help':
