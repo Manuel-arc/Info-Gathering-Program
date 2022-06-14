@@ -13,10 +13,11 @@ def menu():
     print("3. Testssl scan")
     print("4. Finalrecon scan")
     print("5. Loadbalancer scan")
-    print('6. Domain Map')
-    print('7. CSS and JS files')
-    print("8. Full scan")
-    print("9. Help")
+    print("6. DNS dumpster")
+    print('7. WAF')
+    print('8. CSS and JS files')
+    print("9. Full scan")
+    print("10. Help")
     print("0. Exit")
     print(bcolors.ENDC)
 
@@ -52,13 +53,15 @@ def menu():
             _ = False
         elif answer.lower() == "5" or answer.lower() == 'loadbalancer':
             loadbalancer.main()
-        elif answer.lower() == "6" or answer.lower() == 'domain map':
+        elif answer.lower() == "6" or answer.lower() == 'dns dumspter":':
             dns_dumspter.main()
-        elif answer.lower() == "7" or answer.lower() == 'css' or answer.lower() == 'js':
+        elif answer.lower() == "7" or answer.lower() == 'waf':
+            print('waf')
+        elif answer.lower() == "8" or answer.lower() == 'css' or answer.lower() == 'js':
             js_css_files.main()
-        elif answer.lower() == "8" or answer.lower() == 'full':
+        elif answer.lower() == "9" or answer.lower() == 'full':
             print('full scan')
-        elif answer.lower() == "9" or answer.lower() == 'help':
+        elif answer.lower() == "10" or answer.lower() == 'help':
             print(
                 bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
             menu()
