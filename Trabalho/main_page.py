@@ -3,7 +3,7 @@
 from art_logo import *
 from terminal_colors import bcolors
 # importar de outra pasta os scripts
-from tools import nmap, commands, finalrecon, gobuster, loadbalancer, testssl, dns_dumspter, js_css_files
+from tools import nmap, finalrecon, gobuster, loadbalancer, testssl, dns_dumspter, js_css_files
 
 
 def menu():
