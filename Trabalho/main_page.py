@@ -28,29 +28,13 @@ def menu():
 
     while _:
         if answer.lower() == "1" or answer.lower() == 'nmap':
-            print('nmap')
-            print(bcolors.UNDERLINE + "\nInfo Gathering/Nmap" +
-                  bcolors.ENDC + " > ")
             nmap.main()
-            _ = False
         elif answer.lower() == "2" or answer.lower() == 'gobuster':
-            print('gobuster')
-            print(bcolors.UNDERLINE + "\nInfo Gathering/Gobuster" +
-                  bcolors.ENDC + " > ")
             gobuster.main()
-            _ = False
         elif answer.lower() == "3" or answer.lower() == 'testssl':
-            print('testssl')
-            print(bcolors.UNDERLINE + "\nInfo Gathering/Testssl" +
-                  bcolors.ENDC + " > ")
             testssl.main()
-            _ = False
         elif answer.lower() == "4" or answer.lower() == 'finalrecon':
-            print('finalrecon')
-            print(bcolors.UNDERLINE + "\nInfo Gathering/Finalrecon" +
-                  bcolors.ENDC + " > ")
             finalrecon.main()
-            _ = False
         elif answer.lower() == "5" or answer.lower() == 'loadbalancer':
             loadbalancer.main()
         elif answer.lower() == "6" or answer.lower() == 'dns dumspter":':

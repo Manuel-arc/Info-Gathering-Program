@@ -2,7 +2,7 @@
 
 linux_path = "path/to/install/tools"
 
-linux_tools = ['nmap', 'gobuster', 'testssl',
+linux_tools = ['nmap', 'gobuster', 'testssl.sh',
                'locate', 'finalrecon', 'lbd']
 
 
@@ -13,13 +13,16 @@ def is_tool(name):
     return which(name) is not None
 
 
-print(is_tool('lbd'))
-
-
 def install_tools(tool_name):
+    """Install the program if it is not installed."""
     import subprocess as sub
-    print(f"Instalando {tool_name}...")
+    print(f"Installing {tool_name}...")
     try:
         sub.run(f"sudo apt install {tool_name}", shell=True)
     except:
-        print("Não foi possível instalar o programa")
+        print("Not possible to install the program")
+
+
+for t in linux_tools:
+    if not is_tool(t):
+        install_tools(t)

@@ -1,0 +1,24 @@
+[CLIENT] 0x3e0000c
+  [CLIENT_LEADER] 0x3e00001
+  [RES_NAME] terminator
+  [RES_CLASS] Terminator
+  [WM_NAME] manuel@kali: ~
+  [WM_COMMAND] (1) "terminator"
+  [GEOMETRY] (5,66,1908,857)
+  [GEOMETRY-MAXIMIZED] (5,66,654,453)
+  [SCREEN] 0
+  [DESK] 0
+  [FLAGS] 0x10300
+[CLIENT] 0x4000041
+  [CLIENT_ID] 22bf575ff-312d-4af9-8aa4-aa226a4f474d
+  [CLIENT_LEADER] 0x4000001
+  [WINDOW_ROLE] browser
+  [RES_NAME] Navigator
+  [RES_CLASS] Firefox-esr
+  [WM_NAME] [SOLVED] obexfs - "fusermount: user has no write access to mountpoint" / Applications & Desktop Environments / Arch Linux Forums — Mozilla Firefox
+  [WM_COMMAND] (1) "firefox-esr"
+  [GEOMETRY] (0,35,1918,893)
+  [GEOMETRY-MAXIMIZED] (-24,13,1328,852)
+  [SCREEN] 0
+  [DESK] 0
+  [FLAGS] 0x10300
