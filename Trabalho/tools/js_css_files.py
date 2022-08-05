@@ -26,6 +26,10 @@ def main():
         main()
 
 
+def read_url(url):
+    pass
+
+
 def host_to_scan():
     host = input('Host: ')
 
