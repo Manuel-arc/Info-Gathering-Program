@@ -1,6 +1,7 @@
 from random import choices
 import re
 import subprocess as sub
+from unittest import result
 from terminal_colors import bcolors
 import main_page
 import sys
@@ -37,13 +38,16 @@ def main():
 
 def nmap_scan(host, flags):
     nmap = sub.run(f'nmap {flags} {host}', shell=True,
-                   capture_output=True).stdout.decode('utf-8')
+                   capture_output=True, text=True)
 
-    if nmap.returncode == 0:
+    data = nmap.stdout
+    result = nmap.returncode
+
+    if result == 0:
         ''' a = re.findall(
             r'\d{1,5}/\w{1,6}\s{1,9}\w{1,9}\s{1,9}\w{1,20}', nmap, re.MULTILINE) '''
 
-        print(nmap)
+        print(data)
 
         if '80/tcp' in nmap or '443/tcp' in nmap:
             print("Port 80 or 443 is open!")
