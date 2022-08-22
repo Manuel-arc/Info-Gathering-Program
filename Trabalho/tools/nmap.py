@@ -19,6 +19,12 @@ class nmap:
         self.flags = ""
         self.host = ""
 
+    def scan(self, host, flags, sudo=''):
+        nmap = sub.run(f'{sudo} nmap {flags} {host}', shell=True,
+                       capture_output=True, text=True)
+
+        return nmap.stdout, nmap.returncode
+
 
 nmap_commands = nmap()
 
@@ -37,24 +43,29 @@ def main():
 
 
 def nmap_scan(host, flags):
-    nmap = sub.run(f'nmap {flags} {host}', shell=True,
-                   capture_output=True, text=True)
 
-    data = nmap.stdout
-    result = nmap.returncode
+    data, result = nmap_commands.scan(host, flags)
 
-    if result == 0:
+    if result != 0:
+        data, result = nmap_commands.scan(host, flags, 'sudo')
+
+    elif result == 0:
         ''' a = re.findall(
             r'\d{1,5}/\w{1,6}\s{1,9}\w{1,9}\s{1,9}\w{1,20}', nmap, re.MULTILINE) '''
 
-        print(data)
+        print('\n'+data)
 
-        if '80/tcp' in nmap or '443/tcp' in nmap:
+        if "Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn" in data:
+            flags += ' -Pn'
+
+        data, _ = scan(host, flags)
+
+        if '80/tcp' in data or '443/tcp' in data:
             print("Port 80 or 443 is open!")
             choice = input("Do you want to run gobuster? (y/n)")
             if choice == 'y':
                 call_gobuster()
-        elif '139/tcp' in nmap or '445/tcp' in nmap:
+        elif '139/tcp' in data or '445/tcp' in data:
             print("Port 139 or 445 is open!")
             choice = input("Do you want to run enum4linux? (y/n)")
 
