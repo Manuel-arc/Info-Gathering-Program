@@ -14,146 +14,48 @@ sys.path.append(path)
 
 
 class nmap:
-
-    def __init__(self):
-        self.host = ''
-        self.flags = []
-
-    def concatenate_command(self):
-        command = 'nmap'
-
-    def check_options(self):
-        print("Hosts: ", self.host)
-        print('Flags: ', self.flags)
+    def __init__(self) -> None:
+        self.flags = ""
+        self.host = ""
 
 
-nmap_command = nmap()
+nmap_commands = nmap()
 
 
 def main():
 
     print('1. Help')
     print('2. Go Back!')
-    choice = input(bcolors.UNDERLINE +
-                   "\nInfo Gathering/Nmap" + bcolors.ENDC + " > ")
+    nmap_commands.host = input(bcolors.UNDERLINE +
+                               "\nInfo Gathering/Nmap" + bcolors.ENDC + " > Host: ")
 
-    choice = choice.split(" ")
+    nmap_commands.flags = input(bcolors.UNDERLINE +
+                                "\nInfo Gathering/Nmap" + bcolors.ENDC + " > Flags: ")
 
-    if choice[0].upper() == 'OPTIONS':
-        nmap_command.check_options()
-        print()
-        main()
-    elif choice[0].upper() == 'HOST':
-        if choice[1].upper() == 'LIST':
-            check_target_list(choice[2])
-        else:
-            nmap_command.host = choice[1]
-        print()
-        main()
-    elif choice[0].upper() == 'FLAG':
-        print('Choose your flags for the scan')
-        print()
-        main()
-    elif choice[0] == '1':
-        print("Type OPTIONS to see the host and flags for the scan.")
-        print("Type HOST to choose a target.")
-        print("Type HOST LIST to choose a list of targets.")
-        print('Type FLAG to choose the flags for the scan.')
-        print('Separate the flags with a space.')
-        print()
-        main()
-    elif choice[0] == '2':
-        main.menu()
-    else:
-        print("Incorrect input! Please try again!\n")
-        main()
+    nmap_scan(nmap_commands.host, nmap_commands.flags)
 
 
-def nmap_scan():
-    ip = input("Write the ip: ")
-    nmap = sub.run(f'nmap {ip}', shell=True,
+def nmap_scan(host, flags):
+    nmap = sub.run(f'nmap {flags} {host}', shell=True,
                    capture_output=True).stdout.decode('utf-8')
 
     if nmap.returncode == 0:
-        a = re.findall(
-            r'\d{1,5}/\w{1,6}\s{1,9}\w{1,9}\s{1,9}\w{1,20}', nmap, re.MULTILINE)
+        ''' a = re.findall(
+            r'\d{1,5}/\w{1,6}\s{1,9}\w{1,9}\s{1,9}\w{1,20}', nmap, re.MULTILINE) '''
 
-        for e in a:
-            print(e)
+        print(nmap)
 
-        c = []
+        if '80/tcp' in nmap or '443/tcp' in nmap:
+            print("Port 80 or 443 is open!")
+            choice = input("Do you want to run gobuster? (y/n)")
+            if choice == 'y':
+                call_gobuster()
+        elif '139/tcp' in nmap or '445/tcp' in nmap:
+            print("Port 139 or 445 is open!")
+            choice = input("Do you want to run enum4linux? (y/n)")
 
-        for port in a:
-            c.append(re.match(r'\d{1,5}', port).group())
-
-        # to use gobuster next
-        for port in c:
-            if port == '80':
-                print("\nIt appears you have port 80 open!")
-                res = input('Do you wanna do a gobuster? (y/n) ')
-                print()
-                if res.lower() == 'y':
-                    sub.run('gobuster dir -u 127.0.0.1 -w common.txt', shell=True)
-                else:
-                    print('Ok, bye!')
-                    break
     else:
         print("Something went wrong! Sorry!")
-
-
-def check_target_list(target_list):
-    l = sub.run(f'locate {target_list}', shell=True,
-                capture_output=True).stdout.decode('utf-8')
-    output = l.split('\n')
-    output = output[:-1]
-
-    if len(output) == 1:
-        nmap_command.host = target_list
-    else:
-        print('Choose from the given lists your choice:\n')
-        for i in range(len(output)):
-            print(f'{i} - {output[i]}')
-
-        choice = input('Number of list: ')
-        if choice.isdigit():
-            nmap_command.host = output[int(choice)]
-
-
-def discover_ports():
-    print('\n1. TCP SYN discovery')
-    print('2. TCP ACK discovery')
-    print('3. UDP discovery')
-    print('4. SCTP discovery')
-    print('5. Go Back!')
-    choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Host_Discovery/Discover_ports" +
-                   bcolors.ENDC + " > ")
-
-    if choice == '1':
-        print('worked')
-        nmap_command.flags.append('-PS')
-    elif choice == '2':
-        nmap_command.flags.append('-PA')
-    elif choice == '3':
-        nmap_command.flags.append('-PU')
-    elif choice == '4':
-        nmap_command.flags.append('-PY')
-
-
-def host_discovery():
-
-    print('\n1. List scan - simply list targets to scan')
-    print('2. Ping scan - disable port scan')
-    print('3. Treat all hosts as online')
-    print('4. Discorver ports: (choose to get more options)')
-    print('5. Exclude a list from a file')
-    print('6. Go Back!')
-    choice = input(bcolors.UNDERLINE + "\nInfo Gathering/Nmap/Host_Discovery" +
-                   bcolors.ENDC + " > ")
-
-    if choice == '4':
-        discover_ports()
-        for i in nmap_command.flags:
-            print(i)
 
 
 def call_gobuster():

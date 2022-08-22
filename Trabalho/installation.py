@@ -3,7 +3,7 @@
 linux_path = "path/to/install/tools"
 
 linux_tools = ['nmap', 'gobuster', 'testssl.sh',
-               'locate', 'finalrecon', 'lbd']
+               'locate', 'finalrecon', 'lbd', 'enum4linux']
 
 
 def is_tool(name):
