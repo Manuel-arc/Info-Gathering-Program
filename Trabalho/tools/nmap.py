@@ -20,10 +20,13 @@ class nmap:
         self.host = ""
 
     def scan(self, host, flags, sudo=''):
-        nmap = sub.run(f'{sudo} nmap {flags} {host}', shell=True,
-                       capture_output=True, text=True)
+        nmap = f'{sudo} nmap {flags} {host}'
 
-        return nmap.stdout, nmap.returncode
+        with sub.Popen(nmap, stdout=sub.PIPE, bufsize=1, universal_newlines=True) as p:
+            for line in p.stdout:
+                print(line, end='')
+
+            return p.stdout
 
 
 nmap_commands = nmap()
