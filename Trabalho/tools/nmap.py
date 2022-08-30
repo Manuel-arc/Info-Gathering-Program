@@ -22,11 +22,11 @@ class nmap:
     def scan(self, host, flags, sudo=''):
         nmap = f'{sudo} nmap {flags} {host}'
 
-        with sub.Popen(nmap, stdout=sub.PIPE, bufsize=1, universal_newlines=True) as p:
+        """ with sub.Popen(nmap, stdout=sub.PIPE, bufsize=1, universal_newlines=True) as p:
             for line in p.stdout:
-                print(line, end='')
+                print(line, end='') """
 
-            return p.stdout
+        return nmap.stdout, nmap.returncode
 
 
 nmap_commands = nmap()
