@@ -5,6 +5,8 @@ from unittest import result
 from terminal_colors import bcolors
 import main_page
 import sys
+import concurrent.futures as cf
+from tools import gobuster, enum4linux
 
 if sys.platform == "linux" or sys.platform == "linux2":
     path = r'/home/manuel/Info-Program/Info-Gathering-Program/Trabalho'
@@ -20,13 +22,29 @@ class nmap:
         self.host = ""
 
     def scan(self, host, flags, sudo=''):
-        nmap = f'{sudo} nmap {flags} {host}'
+        """ nmap = sub.run(f'{sudo} nmap {flags} {host}', shell=True,
+                       capture_output=True, text=True) """
+        nmap = f"{sudo} nmap {flags} {host}"
+        output = []
+        p = sub.Popen(nmap, shell=True, stdout=sub.PIPE,
+                      stderr=sub.STDOUT, cwd=None, text=True)
+        while(True):
+            next_line = p.stdout.readline()
+            if next_line:
+                output.append(str(next_line))
+                print(next_line, end='')
+            elif not p.poll():
+                break
+
+        error = p.communicate()[1]
+
+        return p.returncode, '\n'.join(output), error
 
         """ with sub.Popen(nmap, stdout=sub.PIPE, bufsize=1, universal_newlines=True) as p:
             for line in p.stdout:
                 print(line, end='') """
 
-        return nmap.stdout, nmap.returncode
+        # return nmap.stdout, nmap.returncode
 
 
 nmap_commands = nmap()
@@ -76,31 +94,44 @@ def main():
 
 def nmap_scan(host, flags):
 
-    data, result = nmap_commands.scan(host, flags)
+    thread_list = []
+
+    result, data, _ = nmap_commands.scan(host, flags)
+    #nmap_commands.scan(host, flags)
 
     if result != 0:
-        data, result = nmap_commands.scan(host, flags, 'sudo')
+        result, data, _ = nmap_commands.scan(host, flags, 'sudo')
 
     elif result == 0:
-        print('\n'+data)
-
         if "Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn" in data:
             flags += ' -Pn'
-            data, _ = nmap_commands.scan(host, flags)
-            print(data)
+            data, result, _ = nmap_commands.scan(host, flags)
 
         if '80/tcp' in data or '443/tcp' in data:
             print("Port 80 or 443 is open!")
             choice = input("Do you want to run gobuster? (y/n)")
             if choice == 'y':
-                call_gobuster()
-        elif '139/tcp' in data or '445/tcp' in data:
+                thread_list.append('gobuster')
+        if '139/tcp' in data or '445/tcp' in data:
             print("Port 139 or 445 is open!")
             choice = input("Do you want to run enum4linux? (y/n)")
+            if choice == 'y':
+                thread_list.append('enum4linux')
+
+        with cf.ThreadPoolExecutor(max_workers=1) as executor:
+            for a in thread_list:
+                if a == 'gobuster':
+                    executor.map(call_gobuster(host))
+                if a == 'enum4linux':
+                    executor.map(call_enum())
 
     else:
         print("Something went wrong! Sorry!")
 
 
-def call_gobuster():
-    return 0
+def call_gobuster(host):
+    gobuster.gobuster_scan(host)
+
+
+def call_enum():
+    print('Got in enum')

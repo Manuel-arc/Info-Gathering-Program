@@ -1,7 +1,7 @@
 import re
 import subprocess as sub
-from terminal_colors import bcolors
-import main_page
+#from terminal_colors import bcolors
+#import main_page
 import sys
 from os import listdir
 from os.path import isfile, join
@@ -39,13 +39,23 @@ def main():
     gobuster_scan()
 
 
-def gobuster_scan():
+def gobuster_scan(host=""):
 
     wordlist = [f for f in listdir(
         wordlist_path) if isfile(join(wordlist_path, f))]
 
-    gobuster_command.host = input("Host: ")
-    print('Wordlists:')
+    w = []
+
+    for l in wordlist:
+        d = sub.run(f'readlink -f {l}', shell=True,
+                    text=True, capture_output=True)
+        w.append(d.stdout.strip())
+
+    if host == '':
+        gobuster_command.host = input("Host: ")
+    else:
+        gobuster_command.host = host
+    print('\nWordlists:')
 
     for i in range(len(wordlist)):
         print(str(i+1) + '. ' + wordlist[i])
