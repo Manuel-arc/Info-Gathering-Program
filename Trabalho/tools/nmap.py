@@ -7,6 +7,7 @@ import main_page
 import sys
 import concurrent.futures as cf
 from tools import gobuster, enum4linux
+import logging
 
 if sys.platform == "linux" or sys.platform == "linux2":
     path = r'/home/manuel/Info-Program/Info-Gathering-Program/Trabalho'
@@ -118,12 +119,8 @@ def nmap_scan(host, flags):
             if choice == 'y':
                 thread_list.append('enum4linux')
 
-        with cf.ThreadPoolExecutor(max_workers=1) as executor:
-            for a in thread_list:
-                if a == 'gobuster':
-                    executor.map(call_gobuster(host))
-                if a == 'enum4linux':
-                    executor.map(call_enum())
+        with cf.ThreadPoolExecutor(max_workers=2) as executor:
+            executor.map(thread_function, thread_list)
 
     else:
         print("Something went wrong! Sorry!")
@@ -133,5 +130,12 @@ def call_gobuster(host):
     gobuster.gobuster_scan(host)
 
 
-def call_enum():
-    print('Got in enum')
+def call_enum(host):
+    sub.run(f"enum4linux {host}", shell=True, text=True)
+
+
+def thread_function(lista_programas):
+    if lista_programas == 'gobuster':
+        call_gobuster(nmap_commands.host)
+    elif lista_programas == 'enum4linux':
+        call_enum(nmap_commands.host)

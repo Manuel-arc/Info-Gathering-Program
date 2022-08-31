@@ -8,7 +8,6 @@ from os.path import isfile, join
 
 if sys.platform == "linux" or sys.platform == "linux2":
     path = r'/home/manuel/Info-Program/Info-Gathering-Program/Trabalho'
-    wordlist_path = r'../Trabalho/Wordlists'
 elif sys.platform == "win32":
     path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs\Trabalho'
     wordlist_path = r'Trabalho\Wordlists'
@@ -22,7 +21,8 @@ class gobuster:
     def __init__(self):
         self.host = []
         self.flags = []
-        self.wordlist = []
+        self.wordlist = ""
+        self.wordlist_path = '/home/manuel/Documents/GitHub/Info-Gathering-Program/Trabalho/Wordlists/'
 
     def concatenate_command(self):
         pass
@@ -42,14 +42,7 @@ def main():
 def gobuster_scan(host=""):
 
     wordlist = [f for f in listdir(
-        wordlist_path) if isfile(join(wordlist_path, f))]
-
-    w = []
-
-    for l in wordlist:
-        d = sub.run(f'readlink -f {l}', shell=True,
-                    text=True, capture_output=True)
-        w.append(d.stdout.strip())
+        gobuster_command.wordlist_path)]
 
     if host == '':
         gobuster_command.host = input("Host: ")
@@ -61,7 +54,8 @@ def gobuster_scan(host=""):
         print(str(i+1) + '. ' + wordlist[i])
 
     choice = input('Choice: ')
-    gobuster_command.wordlist = wordlist[int(choice)-1]
+    gobuster_command.wordlist = gobuster_command.wordlist_path + \
+        wordlist[int(choice)-1]
 
     sub.run(
-        f'gobuster dir -u {gobuster_command.host} -w {gobuster_command.wordlist[0]}', shell=True)
+        f'gobuster dir -u {gobuster_command.host} -w {gobuster_command.wordlist} {gobuster_command.flags}', shell=True)
