@@ -1,0 +1,7 @@
+https://www.igcp.pt/temas/igcp/jquery/jquery.js
+https://www.igcp.pt/temas/igcp/jquery/dhtmllib.js
+https://www.igcp.pt/temas/igcp/jquery/printer.js
+https://www.igcp.pt/temas/igcp/js/menu.js
+https://www.igcp.pt/temas/igcp/js/javascript.js
+https://www.igcp.pt/formbuilder3/formbuilder3.js
+https://www.igcp.pt/plugins/placeholder/placeholder.js

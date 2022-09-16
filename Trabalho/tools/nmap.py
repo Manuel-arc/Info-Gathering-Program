@@ -113,6 +113,10 @@ def nmap_scan(host, flags):
             choice = input("Do you want to run gobuster? (y/n)")
             if choice == 'y':
                 thread_list.append('gobuster')
+
+            choice = input("Do you want to see if it has a WAF? (y/n)")
+            if choice == 'y':
+                thread_list.append('waf')
         if '139/tcp' in data or '445/tcp' in data:
             print("Port 139 or 445 is open!")
             choice = input("Do you want to run enum4linux? (y/n)")
@@ -134,8 +138,14 @@ def call_enum(host):
     sub.run(f"enum4linux {host}", shell=True, text=True)
 
 
+def call_waf(host):
+    pass
+
+
 def thread_function(lista_programas):
     if lista_programas == 'gobuster':
         call_gobuster(nmap_commands.host)
     elif lista_programas == 'enum4linux':
         call_enum(nmap_commands.host)
+    elif lista_programas == 'waf':
+        call_waf(nmap_commands.host)

@@ -3,7 +3,7 @@
 from art_logo import *
 from terminal_colors import bcolors
 # importar de outra pasta os scripts
-from tools import nmap, finalrecon, gobuster, loadbalancer, testssl, dns_dumspter, js_css_files
+from tools import nmap, finalrecon, gobuster, loadbalancer, testssl, dns_dumspter, js_css_files, enum4linux, waf
 
 
 def menu():
@@ -16,7 +16,7 @@ def menu():
     print("6. DNS dumpster")
     print('7. WAF')
     print('8. CSS and JS files')
-    print("9. Full scan")
+    print("9. Enum4linux")
     print("10. Help")
     print("0. Exit")
     print(bcolors.ENDC)
@@ -40,11 +40,11 @@ def menu():
         elif answer.lower() == "6" or answer.lower() == 'dns dumspter":':
             dns_dumspter.main()
         elif answer.lower() == "7" or answer.lower() == 'waf':
-            print('waf')
+            waf.scan_url()
         elif answer.lower() == "8" or answer.lower() == 'css' or answer.lower() == 'js':
             js_css_files.main()
-        elif answer.lower() == "9" or answer.lower() == 'full':
-            print('full scan')
+        elif answer.lower() == "9" or answer.lower() == 'enum4linux':
+            enum4linux.enum_scan()
         elif answer.lower() == "10" or answer.lower() == 'help':
             print(
                 bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
