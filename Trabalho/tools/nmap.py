@@ -136,7 +136,7 @@ def call_gobuster(host):
 
 def call_enum(host):
     sub.run(f"enum4linux {host}", shell=True, text=True)
-
+    
 
 def call_waf(host):
     pass
