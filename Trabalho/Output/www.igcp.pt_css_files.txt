@@ -1,6 +1,0 @@
-http://www.igcp.pt/fotos/frontends/favicon_23052555488fae0d36.ico
-http://www.igcp.pt/noticias/rss.php
-https://www.igcp.pt/plugins/jquery/ui/css/smoothness/style.css
-https://www.igcp.pt/formbuilder3/formbuilder3.css
-https://www.igcp.pt/temas/igcp/css/htmlarea.css
-https://www.igcp.pt/temas/igcp/css/style.css
