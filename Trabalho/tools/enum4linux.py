@@ -51,7 +51,7 @@ def enum_scan(host='', write_file=False):
     if write_file:
         output = sub.run(f'enum4linux {host}',
                          shell=True, text=True, capture_output=True)
-        filename = f'{dirname}/{host}.txt'
+        filename = f'{dirname}/{host}_enum4linux.txt'
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, 'w') as f:
             f.write(output.stdout)

@@ -30,7 +30,7 @@ def scan_url(host=''):
         result = sub.run(
             f'wafw00f http://{host}', shell=True, text=True)
 
-    filename = f'{dirname}/{host}.txt'
+    filename = f'{dirname}/{host}_wafw00f.txt'
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, 'w') as f:
         f.write(result.stdout)
