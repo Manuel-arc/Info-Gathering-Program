@@ -11,13 +11,11 @@ def menu():
     print(bcolors.OKBLUE)
     print("1. Nmap scan")
     print("2. Gobuster scan")
-    print("3. Whois scan")
-    print("4. Loadbalancer scan")
-    print("5. DNS dumpster")
-    print('6. WAF')
-    print('7. CSS and JS files')
-    print("8. Enum4linux")
-    print("9. Help")
+    print("3. DNS dumpster")
+    print('4. WAF')
+    print('5. CSS and JS files')
+    print("6. Enum4linux")
+    print("7. Help")
     print("0. Exit")
     print(bcolors.ENDC)
 
@@ -31,20 +29,20 @@ def menu():
             nmap.main()
         elif answer.lower() == "2" or answer.lower() == 'gobuster':
             gobuster.main()
-        elif answer.lower() == "3" or answer.lower() == 'whois':
+        elif answer.lower() == "" or answer.lower() == 'whois':
             host = input("Host: ")
             str = sub.run(f'finalrecon --whois https://{host}', shell=True)
-        elif answer.lower() == "4" or answer.lower() == 'loadbalancer':
+        elif answer.lower() == "" or answer.lower() == 'loadbalancer':
             loadbalancer.main()
-        elif answer.lower() == "5" or answer.lower() == 'dns dumspter":':
+        elif answer.lower() == "3" or answer.lower() == 'dns dumspter":':
             dns_dumspter.main()
-        elif answer.lower() == "6" or answer.lower() == 'waf':
+        elif answer.lower() == "4" or answer.lower() == 'waf':
             waf.scan_url()
-        elif answer.lower() == "7" or answer.lower() == 'css' or answer.lower() == 'js':
+        elif answer.lower() == "5" or answer.lower() == 'css' or answer.lower() == 'js':
             js_css_files.main()
-        elif answer.lower() == "8" or answer.lower() == 'enum4linux':
+        elif answer.lower() == "6" or answer.lower() == 'enum4linux':
             enum4linux.enum_scan()
-        elif answer.lower() == "9" or answer.lower() == 'help':
+        elif answer.lower() == "7" or answer.lower() == 'help':
             print(
                 bcolors.OKCYAN + '\nYou can use the number or write the tool name to use it\n\n' + bcolors.ENDC)
             menu()
