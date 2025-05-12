@@ -6,9 +6,9 @@ import sys
 import os
 
 if sys.platform == "linux" or sys.platform == "linux2":
-    path = r'/home/manuel/Info-Program/Info-Gathering-Program/Trabalho'
+    path = r''
 elif sys.platform == "win32":
-    path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs\Trabalho'
+    path = r'o'
 
 sys.path.append(path)
 
@@ -17,7 +17,7 @@ def scan_url(host=''):
     if host == '':
         host = input("Host: ")
 
-    write_path = '/home/manuel/Documents/GitHub/Info-Gathering-Program/Trabalho/Output/demo.txt'
+    write_path = 't'
 
     dirname = os.path.dirname(write_path)
 

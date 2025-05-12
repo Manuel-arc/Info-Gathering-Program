@@ -6,12 +6,12 @@ import sys
 import main_page
 
 if sys.platform == "linux" or sys.platform == "linux2":
-    path = r'/home/manuel/Info-Program/Info-Gathering-Program/Trabalho'
+    path = r''
 elif sys.platform == "win32":
-    path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs\Trabalho'
+    path = r''
 
 
-output_path = "/home/manuel/Documents/GitHub/Info-Gathering-Program/Trabalho/Output"
+output_path = ""
 
 
 def main():

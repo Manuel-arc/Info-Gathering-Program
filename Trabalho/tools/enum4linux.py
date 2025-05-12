@@ -6,9 +6,9 @@ import sys
 import os
 
 if sys.platform == "linux" or sys.platform == "linux2":
-    path = r'/home/manuel/Documents/GitHub/Info-Gathering-Program/Trabalho'
+    path = r''
 elif sys.platform == "win32":
-    path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs\Trabalho'
+    path = r''
 
 sys.path.append(path)
 
@@ -41,7 +41,7 @@ def main():
 
 def enum_scan(host='', write_file=False):
 
-    write_path = '/home/manuel/Documents/GitHub/Info-Gathering-Program/Trabalho/Output/demo.txt'
+    write_path = ''
 
     dirname = os.path.dirname(write_path)
 
@@ -62,7 +62,7 @@ def enum_scan(host='', write_file=False):
         output = []
         p = sub.Popen(enum_scan, shell=True, stdout=sub.PIPE,
                       stderr=sub.STDOUT, cwd=None, text=True)
-        while(True):
+        while (True):
             next_line = p.stdout.readline()
             if next_line:
                 output.append(str(next_line))

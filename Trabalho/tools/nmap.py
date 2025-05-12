@@ -10,9 +10,9 @@ from tools import gobuster, enum4linux
 import logging
 
 if sys.platform == "linux" or sys.platform == "linux2":
-    path = r'/home/manuel/Info-Program/Info-Gathering-Program/Trabalho'
+    path = r''
 elif sys.platform == "win32":
-    path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs\Trabalho'
+    path = r''
 
 sys.path.append(path)
 
@@ -29,7 +29,7 @@ class nmap:
         output = []
         p = sub.Popen(nmap, shell=True, stdout=sub.PIPE,
                       stderr=sub.STDOUT, cwd=None, text=True)
-        while(True):
+        while (True):
             next_line = p.stdout.readline()
             if next_line:
                 output.append(str(next_line))
@@ -98,7 +98,7 @@ def nmap_scan(host, flags):
     thread_list = []
 
     result, data, _ = nmap_commands.scan(host, flags)
-    #nmap_commands.scan(host, flags)
+    # nmap_commands.scan(host, flags)
 
     if result != 0:
         result, data, _ = nmap_commands.scan(host, flags, 'sudo')

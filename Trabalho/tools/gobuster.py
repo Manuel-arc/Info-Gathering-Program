@@ -1,15 +1,15 @@
 import re
 import subprocess as sub
-#from terminal_colors import bcolors
-#import main_page
+# from terminal_colors import bcolors
+# import main_page
 import sys
 from os import listdir
 from os.path import isfile, join
 
 if sys.platform == "linux" or sys.platform == "linux2":
-    path = r'/home/manuel/Info-Program/Info-Gathering-Program/Trabalho'
+    path = r''
 elif sys.platform == "win32":
-    path = r'C:\Users\mnlta\OneDrive\Documentos\GitHub\Info-Gathering-Programs\Trabalho'
+    path = r''
     wordlist_path = r'Trabalho\Wordlists'
 
 
@@ -22,7 +22,7 @@ class gobuster:
         self.host = []
         self.flags = []
         self.wordlist = ""
-        self.wordlist_path = '/home/manuel/Documents/GitHub/Info-Gathering-Program/Trabalho/Wordlists/'
+        self.wordlist_path = ''
 
     def concatenate_command(self):
         pass
